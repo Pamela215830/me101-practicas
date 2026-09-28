@@ -1,0 +1,7 @@
+# Resumen del Proceso de Limpieza de Datos — Tema 4
+
+- **Número de filas originales:** 6 filas.
+- **Número de filas finales:** 4 filas (se eliminaron 2 filas que contenían valores faltantes en la columna `nota`).
+- **Tratamiento de valores faltantes por columna:**
+  - `nota`: Se aplicó una estrategia de **eliminación** (`dropna()` / `drop_na()`), eliminando los registros que no contaban con una nota asignada.
+  - `asistencia_pct`: Se aplicó una estrategia de **imputación**, reemplazando las observaciones faltantes con el valor promedio acumulado de la columna de asistencia.
