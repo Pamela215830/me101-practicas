@@ -1,0 +1,49 @@
+library(tidyverse)
+library(e1071)
+
+df <- read_csv("estudiantes_limpio_R.csv")
+
+media   <- mean(df$nota)
+mediana <- median(df$nota)
+desv    <- sd(df$nota)
+varianza <- var(df$nota)
+q1  <- quantile(df$nota, 0.25)
+q3  <- quantile(df$nota, 0.75)
+iqr <- IQR(df$nota)
+
+cat("Media:", media, "\nMediana:", mediana, "\nsd:", desv,
+    "\nvar:", varianza, "\nQ1:", q1, "Q3:", q3, "IQR:", iqr, "\n")
+
+skew_e <- skewness(df$nota)   # type = 3 por defecto
+kurt_e <- kurtosis(df$nota)   # type = 3 por defecto
+cat("Skewness e1071:", skew_e, "\nKurtosis e1071:", kurt_e, "\n")
+
+resumen_estadistico <- function(vector, decimales = 4) {
+  vector <- vector[!is.na(vector)]
+  media <- mean(vector)
+  desv  <- sd(vector)
+  list(
+    n        = length(vector),
+    media    = round(media, decimales),
+    mediana  = round(median(vector), decimales),
+    desv_std = round(desv, decimales),
+    cv_pct   = round(desv / media * 100, decimales)
+  )
+}
+print(resumen_estadistico(df$nota))
+
+
+clasificar_dispersion <- function(cv_pct) {
+  if (cv_pct < 15) {
+    "Baja"
+  } else if (cv_pct < 30) {
+    "Moderada"
+  } else {
+    "Alta"
+  }
+}
+
+for (columna in c("nota", "asistencia_pct")) {
+  res <- resumen_estadistico(df[[columna]])
+  cat(columna, "-> CV =", res$cv_pct, "% ->", clasificar_dispersion(res$cv_pct), "\n")
+}

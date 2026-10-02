@@ -1,0 +1,21 @@
+Reporte de Cierre de la Unidad I — Estadística Descriptiva
+1. Resumen de Estadísticos Descriptivos
+A continuación se presentan los valores clave para las variables evaluadas en el dataset `estudiantes_limpio`:
+
+Columna `nota`:
+Media:(Insertar valor exacto calculando en Tarea 1)
+Desviación Estándar:(Insertar valor exacto)
+Coeficiente de Variación (CV): *(Insertar valor en %)
+Columna `asistencia_pct`:
+Media:(Insertar valor exacto)
+Desviación Estándar:(Insertar valor exacto)
+Coeficiente de Variación (CV): (Insertar valor en %)
+
+2. Clasificación de Dispersión
+Mediante la función automatizada `clasificar_dispersion()`, se obtuvieron los siguientes resultados:
+La variable`nota` presenta una dispersión de nivel [Baja / Moderada / Alta] según su CV.
+La variable `asistencia_pct` presenta una dispersión de nivel [Baja / Moderada / Alta] según su CV.
+
+3. Observaciones sobre Convenciones entre Librerías
+Manejo de Grados de Libertad (ddof): Se evidencia que `numpy` por defecto presupone un entorno poblacional (`ddof=0`), a diferencia de `pandas` y `R` que operan por defecto en entornos muestrales (`ddof=1` / `n-1`).
+Skewness y Curtosis:Se identificó que `e1071` en R requiere parametrización explícita mediante el argumento `type` para igualar exactamente la estimación ajustada por muestra que implementa de forma nativa `pandas`
